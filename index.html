@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Produção</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Inclusão do Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script defer src="script.js"></script>
   <style>
     body {
@@ -172,6 +174,7 @@
         <h2>Dashboard</h2>
         <canvas id="dashboardChart"></canvas>
     </div>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
         const form = document.getElementById('productionForm');
