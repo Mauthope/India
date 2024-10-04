@@ -266,6 +266,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${record.machine}</td>
                 <td>${record.technicalSheet}</td>
                 <td>${record.gramatura}</td>
+                <td>${record.Distribuição}</td>
+                <td>${record.Aderência}</td>
+                <td>${record.Testel}</td>
+                <td>${record.Testev}</td>
+                <td>${record.fgr}</td>
+                <td>${record.agulha}</td>
             `;
             tableBody.appendChild(row);
         });
@@ -339,7 +345,13 @@ document.addEventListener('DOMContentLoaded', () => {
             turn: document.getElementById('turn').value,
             machine: document.getElementById('machine').value,
             technicalSheet: document.getElementById('technicalSheet').value,
-            gramatura: document.getElementById('gramatura').value
+            gramatura: document.getElementById('gramatura').value,
+            Distribuição: document.getElementById('Distribuição').value,
+            Aderência: document.getElementById('Aderência').value,
+            Testel: document.getElementById('Testel').value,
+            Testev: document.getElementById('Testev').value,
+            fgr: document.getElementById('fgr').value,
+            agulha: document.getElementById('agulha').value
         };
 
         dataRecords.push(newRecord);
@@ -357,9 +369,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Download para Excel
     downloadBtn.addEventListener('click', () => {
-        const rows = [['Data', 'Turno', 'Máquina', 'Ficha Técnica', 'Gramatura']];
+        const rows = [['Data', 'Turno', 'Máquina', 'Ficha Técnica', 'Gramatura', 'Distribuição do tecido', 'Aderência de Lâmina', 'Teste de Lâmina', 'Teste de Vincos', 'FGR', 'Teste de microfuros']];
         dataRecords.forEach(record => {
-            rows.push([formatDate(record.date), record.turn, record.machine, record.technicalSheet, record.gramatura]);
+            rows.push([formatDate(record.date), record.turn, record.machine, record.technicalSheet, record.gramatura, record.Distribuição, record.Aderência, record.Testel, record.Testev, record.fgr, record.agulha]);
         });
 
         const csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
