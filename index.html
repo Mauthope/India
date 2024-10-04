@@ -116,7 +116,20 @@ th, td {
             <select id="machine" required>
                 <option value="Laminadora 1">Laminadora 1</option>
                 <option value="Laminadora 2">Laminadora 2</option>
-                <!-- Adicione todas as máquinas aqui -->
+                <option value="Laminadora 2">Laminadora 3</option>
+                <option value="Laminadora 2">Laminadora 4</option>
+                <option value="Laminadora 2">Extrusora 1</option>
+                <option value="Laminadora 2">Extrusora 2</option>
+                <option value="Laminadora 2">Extrusora 3</option>
+                <option value="Laminadora 2">Extrusora 4</option>
+                <option value="Laminadora 2">Extrusora 5</option>
+                <option value="Laminadora 2">Laminadora Solvente Adesivo</option>
+                <option value="Laminadora 2">Impressora 1</option>
+                <option value="Laminadora 2">Impressora 2</option>
+                <option value="Laminadora 2">Impressora 3</option>
+                <option value="Laminadora 2">Impressora 4</option>
+                <option value="Laminadora 2">Extrusora Cast</option>
+                
             </select>
 
             <!-- Listagem dos itens -->
@@ -135,7 +148,55 @@ th, td {
                 <option value="NC">NC</option>
                 <option value="NA">NA</option>
             </select>
+            
+            <label for="Distribuição">Distribuição do tecido com lamina</label>
+            <select id="Distribuição" required>
+                <option value="P">P</option>
+                <option value="C">C</option>
+                <option value="NC">NC</option>
+                <option value="NA">NA</option>
+            </select>
 
+            <label for="Aderência">Aderência de lâmina realizado com fita 3M</label>
+            <select id="Aderência" required>
+                <option value="P">P</option>
+                <option value="C">C</option>
+                <option value="NC">NC</option>
+                <option value="NA">NA</option>
+            </select>
+
+            <label for="Testel">Teste lamina expostos na máquina</label>
+            <select id="Testel" required>
+                <option value="P">P</option>
+                <option value="C">C</option>
+                <option value="NC">NC</option>
+                <option value="NA">NA</option>
+            </select>
+            
+             <label for="Testev">Teste Vincos</label>
+            <select id="Testev" required>
+                <option value="P">P</option>
+                <option value="C">C</option>
+                <option value="NC">NC</option>
+                <option value="NA">NA</option>
+            </select>
+
+             <label for="fgr">Analisar registro do FGR  se está preenchidos</label>
+            <select id="fgr" required>
+                <option value="P">P</option>
+                <option value="C">C</option>
+                <option value="NC">NC</option>
+                <option value="NA">NA</option>
+            </select>
+
+            <label for="agulha">Analise de microperfurador (agulha quebrada)</label>
+            <select id="agulha" required>
+                <option value="P">P</option>
+                <option value="C">C</option>
+                <option value="NC">NC</option>
+                <option value="NA">NA</option>
+            </select>
+            
             <!-- Continue adicionando os outros itens com os mesmos padrões -->
 
             <button type="submit">Salvar</button>
@@ -149,6 +210,15 @@ th, td {
                         <th>Data</th>
                         <th>Turno</th>
                         <th>Máquina</th>
+                        <th>Ficha Técnica / Temperatura / Velocidade / Matéria Prima</th>
+                        <th>Gramatura do tecido laminado</th>
+                        <th>Distribuição do tecido com lamina</th>
+                        <th>Aderência de lâmina realizado com fita 3M</th>
+                        <th>Teste lamina expostos na máquina</th>
+                        <th>Teste Vincos</th>
+                        <th>Analisar registro do FGR  se está preenchidos</th>
+                        <th>Analise de microperfurador</th>
+                        
                         <!-- Continue adicionando os cabeçalhos das colunas -->
                     </tr>
                 </thead>
