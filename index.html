@@ -1,244 +1,92 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Produção</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Inclusão do Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script defer src="script.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
+            margin: 20px;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1, h2 {
-            text-align: center;
-            color: #333;
-        }
-
-        form {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        input, select {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 100%;
-        }
-
-        button {
-            grid-column: span 2;
-            padding: 10px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #218838;
-        }
-
-        .table-container {
-            max-height: 200px;
-            overflow-y: auto;
-            margin-bottom: 20px;
-        }
-
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
-
-        thead {
-            background-color: #007bff;
-            color: white;
-        }
-
-        th, td {
+        table, th, td {
             border: 1px solid #ddd;
             padding: 8px;
-            text-align: left;
         }
-
-        #downloadBtn {
-            background-color: #007bff;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #dashboardChart {
-            max-width: 100%;
-            height: 400px;
-        }
-
-        .filter-container {
-            margin-bottom: 20px;
-            text-align: center;
+        th {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Controle de Produção</h1>
 
-        <form id="productionForm">
-            <label for="date">Data:</label>
-            <input type="date" id="date" required>
-            
-            <label for="turn">Turno:</label>
-            <select id="turn" required>
-                <option value="T1">T1</option>
-                <option value="T2">T2</option>
-                <option value="T3">T3</option>
-            </select>
+    <h1>Controle de Produção</h1>
 
-            <label for="machine">Máquina:</label>
-            <select id="machine" required>
-                <option value="Laminadora 1">Laminadora 1</option>
-                <option value="Laminadora 2">Laminadora 2</option>
-                <option value="Laminadora 3">Laminadora 3</option>
-                <option value="Laminadora 4">Laminadora 4</option>
-                <option value="Extrusora 1">Extrusora 1</option>
-                <option value="Extrusora 2">Extrusora 2</option>
-                <option value="Extrusora 3">Extrusora 3</option>
-                <option value="Extrusora 4">Extrusora 4</option>
-                <option value="Extrusora 5">Extrusora 5</option>
-                <option value="Laminadora Solvente Adesivo">Laminadora Solvente Adesivo</option>
-                <option value="Impressora 1">Impressora 1</option>
-                <option value="Impressora 2">Impressora 2</option>
-                <option value="Impressora 3">Impressora 3</option>
-                <option value="Impressora 4">Impressora 4</option>
-                <option value="Extrusora Cast">Extrusora Cast</option>
-            </select>
+    <form id="productionForm">
+        <label for="date">Data:</label>
+        <input type="date" id="date" required>
+        <label for="turn">Turno:</label>
+        <input type="text" id="turn" required>
+        <label for="machine">Máquina:</label>
+        <input type="text" id="machine" required>
+        <label for="technicalSheet">Ficha Técnica:</label>
+        <input type="text" id="technicalSheet" required>
+        <label for="gramatura">Gramatura:</label>
+        <input type="number" id="gramatura" required>
+        <label for="Distribuição">Distribuição:</label>
+        <input type="text" id="Distribuição" required>
+        <label for="Aderência">Aderência:</label>
+        <input type="text" id="Aderência" required>
+        <label for="Testel">Testel:</label>
+        <input type="text" id="Testel" required>
+        <label for="Testev">Testev:</label>
+        <input type="text" id="Testev" required>
+        <label for="fgr">FGR:</label>
+        <input type="text" id="fgr" required>
+        <label for="agulha">Agulha:</label>
+        <input type="text" id="agulha" required>
+        <button type="submit">Adicionar Produção</button>
+    </form>
 
-            <label for="technicalSheet">Ficha Técnica / Temperatura / Velocidade / Matéria Prima:</label>
-            <select id="technicalSheet" required>
-                <option value="P">P</option>
-                <option value="C">C</option>
-                <option value="NC">NC</option>
-                <option value="NA">NA</option>
-            </select>
+    <label for="monthFilter">Filtrar por Mês:</label>
+    <select id="monthFilter">
+        <option value="">Todos</option>
+        <option value="1">Janeiro</option>
+        <option value="2">Fevereiro</option>
+        <option value="3">Março</option>
+        <option value="4">Abril</option>
+        <option value="5">Maio</option>
+        <option value="6">Junho</option>
+        <option value="7">Julho</option>
+        <option value="8">Agosto</option>
+        <option value="9">Setembro</option>
+        <option value="10">Outubro</option>
+        <option value="11">Novembro</option>
+        <option value="12">Dezembro</option>
+    </select>
 
-            <label for="gramatura">Gramatura do tecido laminado:</label>
-            <select id="gramatura" required>
-                <option value="P">P</option>
-                <option value="C">C</option>
-                <option value="NC">NC</option>
-                <option value="NA">NA</option>
-            </select>
-            
-            <label for="Distribuição">Distribuição do tecido com lamina:</label>
-            <select id="Distribuição" required>
-                <option value="P">P</option>
-                <option value="C">C</option>
-                <option value="NC">NC</option>
-                <option value="NA">NA</option>
-            </select>
-
-            <label for="Aderência">Aderência de lâmina realizado com fita 3M:</label>
-            <select id="Aderência" required>
-                <option value="P">P</option>
-                <option value="C">C</option>
-                <option value="NC">NC</option>
-                <option value="NA">NA</option>
-            </select>
-
-            <label for="Testel">Teste lamina expostos na máquina:</label>
-            <select id="Testel" required>
-                <option value="P">P</option>
-                <option value="C">C</option>
-                <option value="NC">NC</option>
-                <option value="NA">NA</option>
-            </select>
-            
-            <label for="Testev">Teste Vincos:</label>
-            <select id="Testev" required>
-                <option value="P">P</option>
-                <option value="C">C</option>
-                <option value="NC">NC</option>
-                <option value="NA">NA</option>
-            </select>
-
-            <label for="fgr">Analisar registro do FGR se está preenchidos:</label>
-            <select id="fgr" required>
-                <option value="P">P</option>
-                <option value="C">C</option>
-                <option value="NC">NC</option>
-                <option value="NA">NA</option>
-            </select>
-
-            <label for="agulha">Análise de microperfurador (agulha quebrada):</label>
-            <select id="agulha" required>
-                <option value="P">P</option>
-                <option value="C">C</option>
-                <option value="NC">NC</option>
-                <option value="NA">NA</option>
-            </select>
-            
-            <button type="submit">Salvar</button>
-        </form>
-
-        <h2>Filtro por Mês</h2>
-        <div class="filter-container">
-            <label for="monthFilter">Selecione o mês:</label>
-            <select id="monthFilter">
-                <option value="">Todos</option>
-                <option value="01">Janeiro</option>
-                <option value="02">Fevereiro</option>
-                <option value="03">Março</option>
-                <option value="04">Abril</option>
-                <option value="05">Maio</option>
-                <option value="06">Junho</option>
-                <option value="07">Julho</option>
-                <option value="08">Agosto</option>
-                <option value="09">Setembro</option>
-                <option value="10">Outubro</option>
-                <option value="11">Novembro</option>
-                <option value="12">Dezembro</option>
-            </select>
-        </div>
-
-        <h2>Dados Preenchidos</h2>
-        <div class="table-container">
+    <div>
+        <h2>Tabela de Produção</h2>
+        <div>
             <table id="dataTable">
                 <thead>
                     <tr>
                         <th>Data</th>
                         <th>Turno</th>
                         <th>Máquina</th>
-                        <th>Ficha Técnica / Temperatura / Velocidade / Matéria Prima</th>
-                        <th>Gramatura do tecido laminado</th>
-                        <th>Distribuição do tecido com lamina</th>
-                        <th>Aderência de lâmina realizado com fita 3M</th>
-                        <th>Teste lamina expostos na máquina</th>
-                        <th>Teste Vincos</th>
+                        <th>Ficha Técnica</th>
+                        <th>Gramatura</th>
+                        <th>Distribuição</th>
+                        <th>Aderência</th>
+                        <th>Testel</th>
+                        <th>Testev</th>
+                        <th>FGR</th>
                         <th>Analisar registro do FGR se está preenchidos</th>
                         <th>Análise de microperfurador (agulha quebrada)</th>
                     </tr>
@@ -263,6 +111,11 @@
         let productionData = [];
         let chart;
 
+        function initializeTableAndChart() {
+            updateTable(productionData);
+            updateChart();
+        }
+
         function updateTable(data) {
             dataTable.innerHTML = '';
             data.forEach((item) => {
@@ -276,7 +129,7 @@
 
         function updateChart() {
             const labels = productionData.map(item => item.date);
-            const values = productionData.map(item => item.gramatura); // or any other metric you want to track
+            const values = productionData.map(item => item.gramatura);
 
             if (chart) {
                 chart.destroy();
@@ -352,6 +205,9 @@
             link.click();
             document.body.removeChild(link);
         });
+
+        // Inicializa a tabela e o gráfico na carga da página
+        initializeTableAndChart();
     </script>
 </body>
 </html>
