@@ -8,104 +8,104 @@
     <!-- Inclusão do Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script defer src="script.js"></script>
-  <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f9;
-        margin: 0;
-        padding: 0;
-    }
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
 
-    .container {
-        max-width: 1200px;
-        margin: 50px auto;
-        padding: 20px;
-        background: #fff;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-    h1, h2 {
-        text-align: center;
-        color: #333;
-    }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
 
-    form {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin-bottom: 30px;
-    }
+        form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
 
-    label {
-        font-weight: bold;
-    }
+        label {
+            font-weight: bold;
+        }
 
-    input, select {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 100%;
-    }
+        input, select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
 
-    button {
-        grid-column: span 2;
-        padding: 10px;
-        background-color: #28a745;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+        button {
+            grid-column: span 2;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    button:hover {
-        background-color: #218838;
-    }
+        button:hover {
+            background-color: #218838;
+        }
 
-    .table-container {
-        max-height: 200px;
-        overflow-y: auto;
-        margin-bottom: 20px;
-    }
+        .table-container {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    thead {
-        background-color: #007bff;
-        color: white;
-    }
+        thead {
+            background-color: #007bff;
+            color: white;
+        }
 
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
 
-    #downloadBtn {
-        background-color: #007bff;
-        color: white;
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+        #downloadBtn {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    #dashboardChart {
-        max-width: 100%;
-        height: 400px;
-    }
+        #dashboardChart {
+            max-width: 100%;
+            height: 400px;
+        }
 
-    .filter-container {
-        margin-bottom: 20px;
-        text-align: center;
-    }
-</style>
+        .filter-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-        <div class="container">
+    <div class="container">
         <h1>Controle de Produção</h1>
 
         <form id="productionForm">
@@ -123,23 +123,21 @@
             <select id="machine" required>
                 <option value="Laminadora 1">Laminadora 1</option>
                 <option value="Laminadora 2">Laminadora 2</option>
-                <option value="Laminadora 2">Laminadora 3</option>
-                <option value="Laminadora 2">Laminadora 4</option>
-                <option value="Laminadora 2">Extrusora 1</option>
-                <option value="Laminadora 2">Extrusora 2</option>
-                <option value="Laminadora 2">Extrusora 3</option>
-                <option value="Laminadora 2">Extrusora 4</option>
-                <option value="Laminadora 2">Extrusora 5</option>
-                <option value="Laminadora 2">Laminadora Solvente Adesivo</option>
-                <option value="Laminadora 2">Impressora 1</option>
-                <option value="Laminadora 2">Impressora 2</option>
-                <option value="Laminadora 2">Impressora 3</option>
-                <option value="Laminadora 2">Impressora 4</option>
-                <option value="Laminadora 2">Extrusora Cast</option>
-                
+                <option value="Laminadora 3">Laminadora 3</option>
+                <option value="Laminadora 4">Laminadora 4</option>
+                <option value="Extrusora 1">Extrusora 1</option>
+                <option value="Extrusora 2">Extrusora 2</option>
+                <option value="Extrusora 3">Extrusora 3</option>
+                <option value="Extrusora 4">Extrusora 4</option>
+                <option value="Extrusora 5">Extrusora 5</option>
+                <option value="Laminadora Solvente Adesivo">Laminadora Solvente Adesivo</option>
+                <option value="Impressora 1">Impressora 1</option>
+                <option value="Impressora 2">Impressora 2</option>
+                <option value="Impressora 3">Impressora 3</option>
+                <option value="Impressora 4">Impressora 4</option>
+                <option value="Extrusora Cast">Extrusora Cast</option>
             </select>
 
-            <!-- Listagem dos itens -->
             <label for="technicalSheet">Ficha Técnica / Temperatura / Velocidade / Matéria Prima:</label>
             <select id="technicalSheet" required>
                 <option value="P">P</option>
@@ -156,7 +154,7 @@
                 <option value="NA">NA</option>
             </select>
             
-            <label for="Distribuição">Distribuição do tecido com lamina</label>
+            <label for="Distribuição">Distribuição do tecido com lamina:</label>
             <select id="Distribuição" required>
                 <option value="P">P</option>
                 <option value="C">C</option>
@@ -164,7 +162,7 @@
                 <option value="NA">NA</option>
             </select>
 
-            <label for="Aderência">Aderência de lâmina realizado com fita 3M</label>
+            <label for="Aderência">Aderência de lâmina realizado com fita 3M:</label>
             <select id="Aderência" required>
                 <option value="P">P</option>
                 <option value="C">C</option>
@@ -172,7 +170,7 @@
                 <option value="NA">NA</option>
             </select>
 
-            <label for="Testel">Teste lamina expostos na máquina</label>
+            <label for="Testel">Teste lamina expostos na máquina:</label>
             <select id="Testel" required>
                 <option value="P">P</option>
                 <option value="C">C</option>
@@ -180,7 +178,7 @@
                 <option value="NA">NA</option>
             </select>
             
-             <label for="Testev">Teste Vincos</label>
+            <label for="Testev">Teste Vincos:</label>
             <select id="Testev" required>
                 <option value="P">P</option>
                 <option value="C">C</option>
@@ -188,7 +186,7 @@
                 <option value="NA">NA</option>
             </select>
 
-             <label for="fgr">Analisar registro do FGR  se está preenchidos</label>
+            <label for="fgr">Analisar registro do FGR se está preenchidos:</label>
             <select id="fgr" required>
                 <option value="P">P</option>
                 <option value="C">C</option>
@@ -196,7 +194,7 @@
                 <option value="NA">NA</option>
             </select>
 
-            <label for="agulha">Analise de microperfurador (agulha quebrada)</label>
+            <label for="agulha">Análise de microperfurador (agulha quebrada):</label>
             <select id="agulha" required>
                 <option value="P">P</option>
                 <option value="C">C</option>
@@ -204,10 +202,28 @@
                 <option value="NA">NA</option>
             </select>
             
-            <!-- Continue adicionando os outros itens com os mesmos padrões -->
-
             <button type="submit">Salvar</button>
         </form>
+
+        <h2>Filtro por Mês</h2>
+        <div class="filter-container">
+            <label for="monthFilter">Selecione o mês:</label>
+            <select id="monthFilter">
+                <option value="">Todos</option>
+                <option value="01">Janeiro</option>
+                <option value="02">Fevereiro</option>
+                <option value="03">Março</option>
+                <option value="04">Abril</option>
+                <option value="05">Maio</option>
+                <option value="06">Junho</option>
+                <option value="07">Julho</option>
+                <option value="08">Agosto</option>
+                <option value="09">Setembro</option>
+                <option value="10">Outubro</option>
+                <option value="11">Novembro</option>
+                <option value="12">Dezembro</option>
+            </select>
+        </div>
 
         <h2>Dados Preenchidos</h2>
         <div class="table-container">
@@ -223,10 +239,8 @@
                         <th>Aderência de lâmina realizado com fita 3M</th>
                         <th>Teste lamina expostos na máquina</th>
                         <th>Teste Vincos</th>
-                        <th>Analisar registro do FGR  se está preenchidos</th>
-                        <th>Analise de microperfurador</th>
-                        
-                        <!-- Continue adicionando os cabeçalhos das colunas -->
+                        <th>Analisar registro do FGR se está preenchidos</th>
+                        <th>Análise de microperfurador (agulha quebrada)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -234,160 +248,110 @@
             </table>
         </div>
 
-        <button id="downloadBtn">Download Excel</button>
-
-        <h2>Dashboard</h2>
+        <h2>Gráfico de Produção</h2>
         <canvas id="dashboardChart"></canvas>
+
+        <button id="downloadBtn">Baixar Dados</button>
     </div>
 
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('productionForm');
-    const tableBody = document.querySelector('#dataTable tbody');
-    const downloadBtn = document.getElementById('downloadBtn');
-    const chartCtx = document.getElementById('dashboardChart').getContext('2d');
-    const monthFilter = document.getElementById('monthFilter');
+    <script>
+        const productionForm = document.getElementById('productionForm');
+        const dataTable = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+        const dashboardChart = document.getElementById('dashboardChart').getContext('2d');
+        const monthFilter = document.getElementById('monthFilter');
 
-    // Carregar dados do localStorage e preencher tabela
-    let dataRecords = JSON.parse(localStorage.getItem('productionData')) || [];
+        let productionData = [];
+        let chart;
 
-    const formatDate = (dateStr) => {
-        const [year, month, day] = dateStr.split('-');
-        return `${day}/${month}/${year}`;
-    };
+        function updateTable(data) {
+            dataTable.innerHTML = '';
+            data.forEach((item) => {
+                const row = dataTable.insertRow();
+                Object.values(item).forEach((value) => {
+                    const cell = row.insertCell();
+                    cell.textContent = value;
+                });
+            });
+        }
 
-    const updateTable = (filteredData = dataRecords) => {
-        tableBody.innerHTML = '';
-        filteredData.forEach(record => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${formatDate(record.date)}</td>
-                <td>${record.turn}</td>
-                <td>${record.machine}</td>
-                <td>${record.technicalSheet}</td>
-                <td>${record.gramatura}</td>
-                <td>${record.Distribuição}</td>
-                <td>${record.Aderência}</td>
-                <td>${record.Testel}</td>
-                <td>${record.Testev}</td>
-                <td>${record.fgr}</td>
-                <td>${record.agulha}</td>
-            `;
-            tableBody.appendChild(row);
-        });
-    };
+        function updateChart() {
+            const labels = productionData.map(item => item.date);
+            const values = productionData.map(item => item.gramatura); // or any other metric you want to track
 
-    const updateChart = () => {
-        // Agrupando dados por máquina e somando as classificações
-        const machineData = {};
-
-        dataRecords.forEach(record => {
-            if (!machineData[record.machine]) {
-                machineData[record.machine] = { P: 0, C: 0, NC: 0, NA: 0 };
+            if (chart) {
+                chart.destroy();
             }
-            machineData[record.machine][record.technicalSheet]++;
-        });
 
-        const machines = Object.keys(machineData);
-        const pData = machines.map(machine => machineData[machine].P);
-        const cData = machines.map(machine => machineData[machine].C);
-        const ncData = machines.map(machine => machineData[machine].NC);
-        const naData = machines.map(machine => machineData[machine].NA);
-
-        // Atualizando o gráfico com os dados agrupados por máquina
-        new Chart(chartCtx, {
-            type: 'bar',
-            data: {
-                labels: machines,
-                datasets: [
-                    {
-                        label: 'P',
-                        data: pData,
-                        backgroundColor: '#28a745'
-                    },
-                    {
-                        label: 'C',
-                        data: cData,
-                        backgroundColor: '#007bff'
-                    },
-                    {
-                        label: 'NC',
-                        data: ncData,
-                        backgroundColor: '#ffc107'
-                    },
-                    {
-                        label: 'NA',
-                        data: naData,
-                        backgroundColor: '#dc3545'
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: { beginAtZero: true },
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Máquinas'
+            chart = new Chart(dashboardChart, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Gramatura do Tecido Laminado',
+                        data: values,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
                         }
                     }
                 }
-            }
-        });
-    };
+            });
+        }
 
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
+        function filterData() {
+            const month = monthFilter.value;
+            const filteredData = month ? 
+                productionData.filter(item => new Date(item.date).getMonth() + 1 === parseInt(month)) :
+                productionData;
+            updateTable(filteredData);
+        }
 
-        const newRecord = {
-            date: document.getElementById('date').value,
-            turn: document.getElementById('turn').value,
-            machine: document.getElementById('machine').value,
-            technicalSheet: document.getElementById('technicalSheet').value,
-            gramatura: document.getElementById('gramatura').value,
-            Distribuição: document.getElementById('Distribuição').value,
-            Aderência: document.getElementById('Aderência').value,
-            Testel: document.getElementById('Testel').value,
-            Testev: document.getElementById('Testev').value,
-            fgr: document.getElementById('fgr').value,
-            agulha: document.getElementById('agulha').value
-        };
+        productionForm.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-        dataRecords.push(newRecord);
-        localStorage.setItem('productionData', JSON.stringify(dataRecords));
+            const newData = {
+                date: document.getElementById('date').value,
+                turn: document.getElementById('turn').value,
+                machine: document.getElementById('machine').value,
+                technicalSheet: document.getElementById('technicalSheet').value,
+                gramatura: document.getElementById('gramatura').value,
+                Distribuição: document.getElementById('Distribuição').value,
+                Aderência: document.getElementById('Aderência').value,
+                Testel: document.getElementById('Testel').value,
+                Testev: document.getElementById('Testev').value,
+                fgr: document.getElementById('fgr').value,
+                agulha: document.getElementById('agulha').value,
+            };
 
-        updateTable();
-        updateChart();
-    });
+            productionData.push(newData);
+            updateTable(productionData);
+            updateChart();
 
-    monthFilter.addEventListener('change', () => {
-        const selectedMonth = monthFilter.value;
-        const filteredData = dataRecords.filter(record => record.date.startsWith(selectedMonth));
-        updateTable(filteredData);
-    });
-
-    // Download para Excel
-    downloadBtn.addEventListener('click', () => {
-        const rows = [['Data', 'Turno', 'Máquina', 'Ficha Técnica', 'Gramatura', 'Distribuição do tecido', 'Aderência de Lâmina', 'Teste de Lâmina', 'Teste de Vincos', 'FGR', 'Teste de microfuros']];
-        dataRecords.forEach(record => {
-            rows.push([formatDate(record.date), record.turn, record.machine, record.technicalSheet, record.gramatura, record.Distribuição, record.Aderência, record.Testel, record.Testev, record.fgr, record.agulha]);
+            // Limpar formulário
+            productionForm.reset();
         });
 
-        const csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
-        const encodedUri = encodeURI(csvContent);
-        const link = document.createElement('a');
-        link.setAttribute('href', encodedUri);
-        link.setAttribute('download', 'production_data.csv');
-        document.body.appendChild(link);
-        link.click();
-    });
+        monthFilter.addEventListener('change', filterData);
 
-    // Inicializar com os dados já salvos
-    updateTable();
-    updateChart();
-});
-</script>
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            const csvContent = "data:text/csv;charset=utf-8,"
+                + productionData.map(e => Object.values(e).join(",")).join("\n");
 
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "dados_producao.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
 </body>
 </html>
