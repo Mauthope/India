@@ -247,8 +247,8 @@
     const monthFilter = document.getElementById('monthFilter');
     const filterBtn = document.getElementById('filterBtn');
 
-    // Carregar dados do localStorage
     let dataRecords = JSON.parse(localStorage.getItem('productionData')) || [];
+    let chartInstance;
 
     const formatDate = (dateStr) => {
         const [year, month, day] = dateStr.split('-');
@@ -256,12 +256,8 @@
     };
 
     const filterDataByMonth = (monthYear) => {
-        if (!monthYear) return dataRecords; // Retorna todos os dados se não houver filtro
-
-        return dataRecords.filter(record => {
-            const recordMonthYear = record.date.slice(0, 7); // Pega AAAA-MM
-            return recordMonthYear === monthYear;
-        });
+        if (!monthYear) return dataRecords;
+        return dataRecords.filter(record => record.date.slice(0, 7) === monthYear);
     };
 
     const updateTable = (filteredData = dataRecords) => {
@@ -301,7 +297,11 @@
         const ncData = machines.map(machine => machineData[machine].NC);
         const naData = machines.map(machine => machineData[machine].NA);
 
-        new Chart(chartCtx, {
+        if (chartInstance) {
+            chartInstance.destroy(); // Destruir o gráfico existente antes de criar um novo
+        }
+
+        chartInstance = new Chart(chartCtx, {
             type: 'bar',
             data: {
                 labels: machines,
@@ -341,35 +341,29 @@
 
         dataRecords.push(newRecord);
         localStorage.setItem('productionData', JSON.stringify(dataRecords));
+
         updateTable();
         updateChart();
         form.reset();
     });
 
     filterBtn.addEventListener('click', () => {
-        const selectedMonth = monthFilter.value;
-        const filteredData = filterDataByMonth(selectedMonth);
-
+        const filteredData = filterDataByMonth(monthFilter.value);
         updateTable(filteredData);
         updateChart(filteredData);
     });
 
     downloadBtn.addEventListener('click', () => {
         const wb = XLSX.utils.book_new();
-        const ws = XLSX.utils.json_to_sheet(dataRecords.map(record => ({
-            Data: formatDate(record.date),
-            Turno: record.turn,
-            Máquina: record.machine,
-            // Preencha os campos conforme necessário
-        })));
+        const ws = XLSX.utils.json_to_sheet(dataRecords);
         XLSX.utils.book_append_sheet(wb, ws, 'Produção');
         XLSX.writeFile(wb, 'dados_producao.xlsx');
     });
 
-    // Inicializar tabela e gráfico com todos os dados
     updateTable();
     updateChart();
 });
+
 
     </script>
 </body>
