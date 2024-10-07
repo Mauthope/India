@@ -238,26 +238,36 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('productionForm');
-            const tableBody = document.querySelector('#dataTable tbody');
-            const downloadBtn = document.getElementById('downloadBtn');
-            const chartCtx = document.getElementById('dashboardChart').getContext('2d');
-            const monthFilter = document.getElementById('monthFilter');
+    const form = document.getElementById('productionForm');
+    const tableBody = document.querySelector('#dataTable tbody');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const chartCtx = document.getElementById('dashboardChart').getContext('2d');
+    const monthFilter = document.getElementById('monthFilter');
+    const filterBtn = document.getElementById('filterBtn');
 
-            // Carregar dados do localStorage
-            let dataRecords = JSON.parse(localStorage.getItem('productionData')) || [];
+    // Carregar dados do localStorage
+    let dataRecords = JSON.parse(localStorage.getItem('productionData')) || [];
 
-            const formatDate = (dateStr) => {
-                const [year, month, day] = dateStr.split('-');
-                return `${day}/${month}/${year}`;
-            };
+    const formatDate = (dateStr) => {
+        const [year, month, day] = dateStr.split('-');
+        return `${day}/${month}/${year}`;
+    };
 
-            const updateTable = (filteredData = dataRecords) => {
-                tableBody.innerHTML = '';
-                filteredData.forEach(record => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${formatDate(record.date)}</td>
+    const filterDataByMonth = (monthYear) => {
+        if (!monthYear) return dataRecords; // Retorna todos os dados se não houver filtro
+
+        return dataRecords.filter(record => {
+            const recordMonthYear = record.date.slice(0, 7); // Pega AAAA-MM
+            return recordMonthYear === monthYear;
+        });
+    };
+
+    const updateTable = (filteredData = dataRecords) => {
+        tableBody.innerHTML = '';
+        filteredData.forEach(record => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${formatDate(record.date)}</td>
                 <td>${record.turn}</td>
                 <td>${record.machine}</td>
                 <td>${record.technicalSheet}</td>
@@ -268,107 +278,97 @@
                 <td>${record.Testev}</td>
                 <td>${record.fgr}</td>
                 <td>${record.agulha}</td>
-
-
-                    `;
-                    tableBody.appendChild(row);
-                });
-            };
-
-            const updateChart = (filteredData = dataRecords) => {
-                const machineData = {};
-
-                filteredData.forEach(record => {
-                    if (!machineData[record.machine]) {
-                        machineData[record.machine] = { P: 0, C: 0, NC: 0, NA: 0 };
-                    }
-                    machineData[record.machine][record.technicalSheet]++;
-                });
-
-                const machines = Object.keys(machineData);
-                const pData = machines.map(machine => machineData[machine].P);
-                const cData = machines.map(machine => machineData[machine].C);
-                const ncData = machines.map(machine => machineData[machine].NC);
-                const naData = machines.map(machine => machineData[machine].NA);
-
-                new Chart(chartCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: machines,
-                        datasets: [
-                            { label: 'P', data: pData, backgroundColor: '#28a745' },
-                            { label: 'C', data: cData, backgroundColor: '#007bff' },
-                            { label: 'NC', data: ncData, backgroundColor: '#ffc107' },
-                            { label: 'NA', data: naData, backgroundColor: '#dc3545' }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: { beginAtZero: true },
-                            x: { title: { display: true, text: 'Máquinas' } }
-                        }
-                    }
-                });
-            };
-
-            form.addEventListener('submit', (event) => {
-                event.preventDefault();
-
-                const newRecord = {
-                    date: document.getElementById('date').value,
-                    turn: document.getElementById('turn').value,
-                    machine: document.getElementById('machine').value,
-                    technicalSheet: document.getElementById('technicalSheet').value,
-                    // Continue preenchendo os dados
-                };
-
-                dataRecords.push(newRecord);
-                localStorage.setItem('productionData', JSON.stringify(dataRecords));
-                updateTable();
-                updateChart();
-                form.reset();
-            });
-
-            downloadBtn.addEventListener('click', () => {
-                const wb = XLSX.utils.book_new();
-                const ws = XLSX.utils.json_to_sheet(dataRecords.map(record => ({
-                    Data: formatDate(record.date),
-                    Turno: record.turn,
-                    Máquina: record.machine,
-                    // Preencha os campos conforme necessário
-                })));
-                XLSX.utils.book_append_sheet(wb, ws, 'Produção');
-                XLSX.writeFile(wb, 'dados_producao.xlsx');
-            });
-
-            document.getElementById('filterBtn').addEventListener('click', () => {
-                const selectedMonth = monthFilter.value;
-                if (!selectedMonth) return;
-
-                const filteredData = dataRecords.filter(record => {
-                    return record.date.startsWith(selectedMonth);
-                });
-
-                updateTable(filteredData);
-                updateChart(filteredData);
-            });
-
-            // Carregar os dados iniciais da página filtrados por mês atual
-            const loadInitialData = () => {
-                const currentMonth = new Date().toISOString().slice(0, 7); // Formato YYYY-MM
-                monthFilter.value = currentMonth;
-
-                const filteredData = dataRecords.filter(record => {
-                    return record.date.startsWith(currentMonth);
-                });
-
-                updateTable(filteredData);
-                updateChart(filteredData);
-            };
-
-            loadInitialData(); // Carregar o gráfico e tabela com os dados do mês atual ao iniciar a página
+            `;
+            tableBody.appendChild(row);
         });
+    };
+
+    const updateChart = (filteredData = dataRecords) => {
+        const machineData = {};
+
+        filteredData.forEach(record => {
+            if (!machineData[record.machine]) {
+                machineData[record.machine] = { P: 0, C: 0, NC: 0, NA: 0 };
+            }
+            machineData[record.machine][record.technicalSheet]++;
+        });
+
+        const machines = Object.keys(machineData);
+        const pData = machines.map(machine => machineData[machine].P);
+        const cData = machines.map(machine => machineData[machine].C);
+        const ncData = machines.map(machine => machineData[machine].NC);
+        const naData = machines.map(machine => machineData[machine].NA);
+
+        new Chart(chartCtx, {
+            type: 'bar',
+            data: {
+                labels: machines,
+                datasets: [
+                    { label: 'P', data: pData, backgroundColor: '#28a745' },
+                    { label: 'C', data: cData, backgroundColor: '#007bff' },
+                    { label: 'NC', data: ncData, backgroundColor: '#ffc107' },
+                    { label: 'NA', data: naData, backgroundColor: '#dc3545' }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true },
+                    x: { title: { display: true, text: 'Máquinas' } }
+                }
+            }
+        });
+    };
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const newRecord = {
+            date: document.getElementById('date').value,
+            turn: document.getElementById('turn').value,
+            machine: document.getElementById('machine').value,
+            technicalSheet: document.getElementById('technicalSheet').value,
+            gramatura: document.getElementById('gramatura').value,
+            Distribuição: document.getElementById('Distribuição').value,
+            Aderência: document.getElementById('Aderência').value,
+            Testel: document.getElementById('Testel').value,
+            Testev: document.getElementById('Testev').value,
+            fgr: document.getElementById('fgr').value,
+            agulha: document.getElementById('agulha').value,
+        };
+
+        dataRecords.push(newRecord);
+        localStorage.setItem('productionData', JSON.stringify(dataRecords));
+        updateTable();
+        updateChart();
+        form.reset();
+    });
+
+    filterBtn.addEventListener('click', () => {
+        const selectedMonth = monthFilter.value;
+        const filteredData = filterDataByMonth(selectedMonth);
+
+        updateTable(filteredData);
+        updateChart(filteredData);
+    });
+
+    downloadBtn.addEventListener('click', () => {
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.json_to_sheet(dataRecords.map(record => ({
+            Data: formatDate(record.date),
+            Turno: record.turn,
+            Máquina: record.machine,
+            // Preencha os campos conforme necessário
+        })));
+        XLSX.utils.book_append_sheet(wb, ws, 'Produção');
+        XLSX.writeFile(wb, 'dados_producao.xlsx');
+    });
+
+    // Inicializar tabela e gráfico com todos os dados
+    updateTable();
+    updateChart();
+});
+
     </script>
 </body>
 </html>
